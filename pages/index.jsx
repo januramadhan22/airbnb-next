@@ -4,10 +4,12 @@ import Header from "../components/Header";
 import Card from "../components/Card";
 import { useState } from "react";
 import Footer from "../components/Footer";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [openDate, setOpenDate] = useState(false);
   const item = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   console.log(item);
@@ -19,11 +21,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <div className="w-full grid grid-cols-4 gap-y-10 py-10">
+      <Header onDate={openDate} toogle={() => setOpenDate(!openDate)} />
+      <div
+        onClick={() => setOpenDate(!openDate)}
+        className="w-full grid grid-cols-4 gap-y-10 py-10"
+      >
         {item.map((list) => (
           <div className="flex justify-center ">
-            <Card key={list} />
+            <Link href={`/detail/title`}>
+              <Card key={list} />
+            </Link>
           </div>
         ))}
       </div>
